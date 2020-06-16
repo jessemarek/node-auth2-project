@@ -25,8 +25,15 @@ function requiresAuth(req, res, next) {
     }
 }
 
-function checkDept(dept) {
-    return (req, res, next) => {
+function checkDept(req, res, next) {
+
+    const { department } = req.decodedToken
+
+    if (department) {
+        req.dept = department
         next()
+    }
+    else {
+        res.status(403).json({ message: "access not authorized" })
     }
 }

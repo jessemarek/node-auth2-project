@@ -17,8 +17,9 @@ async function add(user) {
     }
 }
 
-function find() {
+function find(dept) {
     return db('users')
+        .where(dept)
         .select('id', 'username', 'department')
         .orderBy('id')
 }
